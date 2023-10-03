@@ -1,0 +1,25 @@
+# IP ACCESS RUNNER
+
+Para utilizar o script de verificação de IP para acesso, basta seguir os seguintes passos:
+
+1. Cole o **ipm-runner.py** na raiz do projeto
+2. Adicione o seguinte trecho ao **Dockerfile**:
+    ```
+    python3:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./app:/app
+    ```
+3. Adicione o seguinte trecho ao **docker-compose.yml**:
+    ```
+    COPY imp-runner.py requirements.txt /var/www/
+
+    RUN pip install --no-cache-dir -r requirements.txt
+    ```
+
+4. Adicione um método **de acordo com a linguagem/framework que estiver usando** para rodar o seguinte comando:
+    ```
+    docker exec <NOME_DO_CONTAINER> python /var/www/ipm-runner.py
+    ```
